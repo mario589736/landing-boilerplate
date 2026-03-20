@@ -1,0 +1,81 @@
+---
+interface Props {
+  logo?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  logo = 'YourBrand',
+  ctaLabel = 'Get started',
+  ctaHref = '#contact',
+} = Astro.props;
+---
+
+<nav class="nav">
+  <div class="nav__inner">
+    <a href="/" class="nav__logo">{logo}</a>
+
+    <ul class="nav__links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#social-proof">Results</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+
+    <a href={ctaHref} class="btn btn--primary">{ctaLabel}</a>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: color-mix(in oklch, var(--color-bg) 85%, transparent);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-content);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .nav__logo {
+    font-weight: 700;
+    font-size: var(--text-lg);
+    text-decoration: none;
+    color: var(--color-text-primary);
+    margin-right: auto;
+  }
+
+  .nav__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 2rem;
+  }
+
+  .nav__links a {
+    text-decoration: none;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    transition: color 0.15s;
+  }
+
+  .nav__links a:hover {
+    color: var(--color-text-primary);
+  }
+
+  @media (max-width: 640px) {
+    .nav__links {
+      display: none;
+    }
+  }
+</style>

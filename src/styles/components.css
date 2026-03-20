@@ -1,0 +1,94 @@
+/*
+  Shared component styles — imported in Base.astro or individual components.
+  Keep component tokens co-located with their styles, not scattered.
+*/
+
+@layer components {
+  /* Buttons */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1.25rem;
+    border-radius: var(--radius-md);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.15s, color 0.15s, box-shadow 0.15s, transform 0.1s;
+    white-space: nowrap;
+  }
+
+  .btn:active {
+    transform: scale(0.98);
+  }
+
+  .btn--primary {
+    background-color: var(--color-interactive);
+    color: white;
+  }
+
+  .btn--primary:hover {
+    background-color: var(--color-interactive-hover);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .btn--ghost {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+  }
+
+  .btn--ghost:hover {
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+  }
+
+  .btn--lg {
+    padding: 0.875rem 1.75rem;
+    font-size: var(--text-base);
+    border-radius: var(--radius-lg);
+  }
+
+  /* Layout */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--space-content);
+    width: 100%;
+  }
+
+  .container--narrow {
+    max-width: 760px;
+  }
+
+  /* Sections */
+  .section {
+    padding: var(--space-section) var(--space-content);
+  }
+
+  .section__header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .section__headline {
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--color-text-primary);
+    margin: 0.5rem 0 0;
+  }
+
+  /* Eyebrow text */
+  .eyebrow {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-interactive);
+    margin: 0;
+  }
+}

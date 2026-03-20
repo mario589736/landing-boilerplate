@@ -1,0 +1,108 @@
+---
+/*
+  FAQ — removes objections before the final CTA.
+  These questions should answer the real hesitations, not softballs.
+  Think: price, trust, time to value, alternatives.
+  Schema markup included for SEO rich snippets.
+*/
+
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  headline?: string;
+  items: FAQItem[];
+}
+
+const { eyebrow, headline = 'Frequently asked questions', items } = Astro.props;
+
+const schemaData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<section id="faq" class="section">
+  <div class="container container--narrow">
+    <div class="section__header">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h2 class="section__headline">{headline}</h2>
+    </div>
+
+    <div class="faq">
+      {items.map((item) => (
+        <details class="faq__item">
+          <summary class="faq__question">{item.question}</summary>
+          <p class="faq__answer">{item.answer}</p>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />
+
+<style>
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .faq__item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background-color: var(--color-surface);
+  }
+
+  .faq__question {
+    padding: 1.25rem 1.5rem;
+    font-weight: 600;
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    user-select: none;
+  }
+
+  .faq__question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__question::after {
+    content: '+';
+    font-size: 1.25rem;
+    line-height: 1;
+    color: var(--color-text-muted);
+    transition: transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  details[open] .faq__question::after {
+    transform: rotate(45deg);
+  }
+
+  .faq__answer {
+    padding: 0 1.5rem 1.25rem;
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+  }
+</style>

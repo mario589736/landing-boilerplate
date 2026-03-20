@@ -1,0 +1,133 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import Features from '../components/Features.astro';
+import SocialProof from '../components/SocialProof.astro';
+import FAQ from '../components/FAQ.astro';
+import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
+
+/*
+  LANDING PAGE CONTENT — edit everything here, don't touch component files.
+  Copy framework: PAS (Problem → Agitate → Solve)
+  Page flow: Nav → Hero → Social proof → Features → Testimonials → FAQ → CTA → Footer
+*/
+
+const features = [
+  {
+    icon: '⚡',
+    title: 'Ships in days, not months',
+    description: 'Pre-built design system, copy frameworks, and component library. Clone and go live the same week.',
+    span: 'wide' as const,
+  },
+  {
+    icon: '🎨',
+    title: 'Design token system',
+    description: 'Three-layer token architecture. Change your brand with one file.',
+  },
+  {
+    icon: '♿',
+    title: 'Accessible by default',
+    description: 'WCAG 2.2 AA compliance built in. Semantic HTML, ARIA labels, focus management.',
+  },
+  {
+    icon: '🌙',
+    title: 'Dark mode',
+    description: 'Automatic via prefers-color-scheme. Not just inverted colors — a real dark theme.',
+  },
+  {
+    icon: '📱',
+    title: 'Mobile-first',
+    description: 'Fluid typography, responsive grid, touch-friendly interactions.',
+  },
+];
+
+const testimonials = [
+  {
+    quote: 'We cut our launch time by 60%. The design system alone saved us two weeks of bikeshedding.',
+    name: 'Anna Huber',
+    role: 'Founder, Stackr',
+    avatar: 'https://i.pravatar.cc/80?img=1',
+  },
+  {
+    quote: 'Finally a boilerplate that treats copy as seriously as code. The PAS framework in every component is a game changer.',
+    name: 'Tom Reiter',
+    role: 'CPO, Newflow',
+    avatar: 'https://i.pravatar.cc/80?img=2',
+  },
+  {
+    quote: 'The token system made our rebrand painless. Changed three variables and the whole site updated.',
+    name: 'Mia Schuster',
+    role: 'Head of Design, Loopify',
+    avatar: 'https://i.pravatar.cc/80?img=3',
+  },
+];
+
+const faqItems = [
+  {
+    question: 'What do I need to know to use this?',
+    answer: 'Basic HTML and CSS. You do not need to know React or any JS framework. Astro handles the component model and ships zero JS by default.',
+  },
+  {
+    question: 'Can I use a custom font?',
+    answer: 'Yes. Self-host your font in /public/fonts, add a preload link in Base.astro, and update the font-family in global.css. The fluid type scale uses CSS clamp() and works with any typeface.',
+  },
+  {
+    question: 'How do I change the brand color?',
+    answer: 'Edit --color-brand-500/600/700 in src/styles/global.css. The OKLCH color space is used, which gives perceptually uniform lightness steps. Everything else updates automatically.',
+  },
+  {
+    question: 'Does it work without JavaScript?',
+    answer: 'Yes. Astro ships zero client-side JS by default. The FAQ accordion uses native HTML details/summary. Add islands (client:load, client:visible) only where interactivity is required.',
+  },
+  {
+    question: 'Is there a dark mode?',
+    answer: 'Yes, automatic via prefers-color-scheme. The semantic token layer handles the theme switch — components never hardcode color values, so dark mode just works.',
+  },
+];
+---
+
+<Base
+  title="YourProduct — The best way to do X"
+  description="Stop wasting weeks on setup. Ship your landing page this week with a battle-tested Astro boilerplate built for conversion."
+>
+  <Nav logo="YourBrand" ctaLabel="Get started" ctaHref="#contact" />
+
+  <Hero
+    badge="Open source · Free forever"
+    headline="Ship your landing page this week, not next month"
+    subheadline="A conversion-focused Astro boilerplate with a real design system, copy frameworks baked in, and zero JavaScript by default."
+    ctaPrimary={{ label: 'Get started free', href: '#contact' }}
+    ctaSecondary={{ label: 'View on GitHub', href: 'https://github.com' }}
+    socialProof="Trusted by 500+ founders and indie hackers."
+  />
+
+  <SocialProof
+    eyebrow="Social proof"
+    headline="Founders ship faster"
+    testimonials={testimonials}
+  />
+
+  <Features
+    eyebrow="What you get"
+    headline="Everything you need, nothing you don't"
+    features={features}
+  />
+
+  <FAQ
+    eyebrow="FAQ"
+    headline="Questions before you start"
+    items={faqItems}
+  />
+
+  <CTA
+    headline="Ready to ship?"
+    subheadline="Clone the repo and go live this week."
+    ctaLabel="Get started free"
+    ctaHref="#contact"
+    riskReducer="Open source. No lock-in. MIT license."
+  />
+
+  <Footer brand="YourBrand" />
+</Base>

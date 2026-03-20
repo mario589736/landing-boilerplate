@@ -1,0 +1,138 @@
+---
+/*
+  Social Proof — the trust-building section.
+  Placement: after hero OR after features (A/B test both).
+
+  COPY GUIDELINES:
+  - Quote must include a specific outcome, not vague praise.
+  - "We increased conversions by 34%" beats "Great product, highly recommend."
+  - Attribute with full name, title, company — anonymized testimonials kill trust.
+  - Logo strip (5-8 logos max) signals credibility without reading.
+*/
+
+interface Testimonial {
+  quote: string;
+  name: string;
+  role: string;
+  avatar?: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  headline?: string;
+  testimonials: Testimonial[];
+  logos?: { src: string; alt: string }[];
+}
+
+const { eyebrow, headline, testimonials, logos } = Astro.props;
+---
+
+<section id="social-proof" class="section section--muted">
+  <div class="container">
+    {(eyebrow || headline) && (
+      <div class="section__header">
+        {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+        {headline && <h2 class="section__headline">{headline}</h2>}
+      </div>
+    )}
+
+    {logos && logos.length > 0 && (
+      <div class="logo-strip">
+        {logos.map((l) => (
+          <img src={l.src} alt={l.alt} class="logo-strip__logo" loading="lazy" />
+        ))}
+      </div>
+    )}
+
+    <div class="testimonials">
+      {testimonials.map((t) => (
+        <blockquote class="testimonial">
+          <p class="testimonial__quote">"{t.quote}"</p>
+          <footer class="testimonial__footer">
+            {t.avatar && (
+              <img src={t.avatar} alt={t.name} class="testimonial__avatar" loading="lazy" />
+            )}
+            <div>
+              <cite class="testimonial__name">{t.name}</cite>
+              <span class="testimonial__role">{t.role}</span>
+            </div>
+          </footer>
+        </blockquote>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section--muted {
+    background-color: var(--color-surface);
+  }
+
+  .logo-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 3rem;
+    opacity: 0.6;
+    filter: grayscale(1);
+  }
+
+  .logo-strip__logo {
+    height: 28px;
+    width: auto;
+  }
+
+  .testimonials {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .testimonial {
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .testimonial__quote {
+    font-size: var(--text-base);
+    color: var(--color-text-primary);
+    line-height: 1.65;
+    margin: 0;
+    flex: 1;
+  }
+
+  .testimonial__footer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .testimonial__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+  }
+
+  .testimonial__name {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--color-text-primary);
+  }
+
+  .testimonial__role {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+</style>

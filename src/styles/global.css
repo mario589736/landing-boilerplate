@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+/*
+  Design Tokens — 3-layer token system (Primitive → Semantic → Component)
+  Edit here to retheme the entire site without touching components.
+
+  Primitive layer: raw values
+  Semantic layer: purpose-named aliases
+  Component layer: applied in component styles
+*/
+
+@layer base {
+  :root {
+    /* Primitives */
+    --color-neutral-50: oklch(98% 0 0);
+    --color-neutral-100: oklch(95% 0 0);
+    --color-neutral-200: oklch(90% 0 0);
+    --color-neutral-400: oklch(70% 0 0);
+    --color-neutral-600: oklch(50% 0 0);
+    --color-neutral-800: oklch(30% 0 0);
+    --color-neutral-900: oklch(15% 0 0);
+    --color-neutral-950: oklch(8% 0 0);
+
+    --color-brand-500: oklch(60% 0.2 260);
+    --color-brand-600: oklch(52% 0.2 260);
+    --color-brand-700: oklch(44% 0.2 260);
+
+    /* Semantic — light mode */
+    --color-bg: var(--color-neutral-50);
+    --color-surface: white;
+    --color-text-primary: var(--color-neutral-900);
+    --color-text-secondary: var(--color-neutral-600);
+    --color-text-muted: var(--color-neutral-400);
+    --color-border: var(--color-neutral-200);
+    --color-interactive: var(--color-brand-500);
+    --color-interactive-hover: var(--color-brand-600);
+
+    /* Typography scale — fluid via clamp() */
+    --text-xs: clamp(0.75rem, 0.7rem + 0.2vw, 0.875rem);
+    --text-sm: clamp(0.875rem, 0.8rem + 0.3vw, 1rem);
+    --text-base: clamp(1rem, 0.9rem + 0.4vw, 1.125rem);
+    --text-lg: clamp(1.125rem, 1rem + 0.5vw, 1.25rem);
+    --text-xl: clamp(1.25rem, 1.1rem + 0.7vw, 1.5rem);
+    --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+    --text-3xl: clamp(2rem, 1.6rem + 1.8vw, 2.75rem);
+    --text-4xl: clamp(2.75rem, 2rem + 3vw, 4rem);
+
+    /* Spacing */
+    --space-section: clamp(4rem, 8vw, 8rem);
+    --space-content: clamp(1.5rem, 4vw, 3rem);
+
+    /* Radii */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.625rem;
+    --radius-lg: 1rem;
+    --radius-xl: 1.5rem;
+    --radius-full: 9999px;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 3px oklch(0% 0 0 / 0.08);
+    --shadow-md: 0 4px 16px oklch(0% 0 0 / 0.10);
+    --shadow-lg: 0 12px 40px oklch(0% 0 0 / 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-bg: var(--color-neutral-950);
+      --color-surface: var(--color-neutral-900);
+      --color-text-primary: var(--color-neutral-50);
+      --color-text-secondary: var(--color-neutral-400);
+      --color-text-muted: var(--color-neutral-600);
+      --color-border: oklch(25% 0 0);
+      --color-interactive: oklch(68% 0.18 260);
+      --color-interactive-hover: oklch(76% 0.18 260);
+    }
+  }
+
+  html {
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: var(--text-base);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}

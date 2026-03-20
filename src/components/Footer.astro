@@ -1,0 +1,57 @@
+---
+interface Props {
+  brand?: string;
+  year?: number;
+}
+
+const { brand = 'YourBrand', year = new Date().getFullYear() } = Astro.props;
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <p class="footer__copy">© {year} {brand}. All rights reserved.</p>
+    <nav class="footer__links">
+      <a href="/privacy">Privacy</a>
+      <a href="/imprint">Imprint</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--color-border);
+    padding: 2rem var(--space-content);
+  }
+
+  .footer__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer__copy {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  .footer__links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer__links a {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer__links a:hover {
+    color: var(--color-text-secondary);
+  }
+</style>
