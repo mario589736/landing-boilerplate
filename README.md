@@ -83,6 +83,25 @@ npm run build
 # upload dist/ to any static host
 ```
 
+### 6. Get found fast (IndexNow)
+
+Search engines normally wait days to recrawl new pages. IndexNow pushes your URLs to Bing the moment you deploy (and Bing is what Ecosia, Yandex, and others read). `scripts/indexnow.mjs` runs after every production build, reads your sitemap, and submits every page.
+
+One-time setup:
+
+1. Open `scripts/indexnow.mjs` and set `HOST` to your canonical domain (must match `site:` in `astro.config.mjs`).
+2. Generate a key:
+   ```bash
+   node -e "console.log(crypto.randomUUID().replace(/-/g,'')+crypto.randomUUID().replace(/-/g,''))"
+   ```
+3. Put it in `KEY` in the same file.
+4. Create `public/<KEY>.txt` containing exactly that key on one line (proves you own the domain).
+5. Deploy. The ping fires automatically on every production build from then on.
+
+Until `HOST` and `KEY` are set, the script no-ops, so it never breaks a fresh clone. Preview and local builds are skipped; force one with `INDEXNOW_FORCE=1 npm run build`.
+
+Optionally, also add your domain to [Bing Webmaster Tools](https://www.bing.com/webmasters) for an indexing dashboard. There is no equivalent for Google here, IndexNow covers Bing-family engines only.
+
 ---
 
 ## Skills library
@@ -132,7 +151,7 @@ skills/
 | Command | Action |
 |---------|--------|
 | `npm run dev` | Start local dev server at `localhost:4321` |
-| `npm run build` | Build to `./dist/` |
+| `npm run build` | Build to `./dist/` (runs the IndexNow ping after, if configured) |
 | `npm run preview` | Preview production build locally |
 
 ---
